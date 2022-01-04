@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-#  File: app.py
+#  File: main.py
 #  Project: 'Homework #2 OTUS.ML.Advanced'
 #  Created by Gennady Matveev (gm@og.ly) on 04-01-2022.
 #  Copyright 2022. All rights reserved.
@@ -15,7 +15,6 @@ cols = ['age', 'sex', 'cp', 'trestbps', 'chol', 'fbs', 'restecg', 'thalach',
        'exang', 'oldpeak', 'slope', 'ca', 'thal']
 
 atom = ATOMLoader("./models/atom20220104-32256", verbose=0)
-# model_link = "https://drive.google.com/uc?export=download&id=1BMyvaDs79Q74XGCc5WvZudv5tkoBIQkE"
 
 # Initialize app
 app = FastAPI()
@@ -28,7 +27,6 @@ async def index():
 
 @app.get('/predict/')
 async def predict(q: Optional[List[float]] = Query(None)):
-# def read_items(q: Optional[List[float]] = Query(None)):
     dfx = pd.DataFrame([q], columns = cols)
     prediction = atom.predict(dfx)
     return int(prediction[0])
