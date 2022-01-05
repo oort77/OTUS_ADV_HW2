@@ -67,7 +67,7 @@ send_req = st.button('Send get request')
 
 # worker_port = int(os.getenv('WPORT'))
 worker_port = 8080
-worker_address = "http://worker.1:" + str(worker_port) + "/predict/"
+worker_address = "http://localhost:" + str(worker_port) + "/predict/"
 
 # Main page button
 if send_req:
