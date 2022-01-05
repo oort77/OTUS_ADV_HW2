@@ -5,6 +5,7 @@
 #  Copyright 2022. All rights reserved.
 
 # Import libraries
+import os
 import uvicorn
 from atom import ATOMLoader
 from fastapi import FastAPI, Query
@@ -33,4 +34,5 @@ async def predict(q: Optional[List[float]] = Query(None)):
 
 
 if __name__ == '__main__':
-    uvicorn.run("main:app", host="0.0.0.0", port=8080)
+    port = int(os.environ.get("PORT", 8080))
+    uvicorn.run("main:app", host="0.0.0.0", port=port)

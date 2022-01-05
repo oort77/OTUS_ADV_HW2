@@ -4,6 +4,7 @@
 #  Created by Gennady Matveev (gm@og.ly) on 02-01-2022.
 
 # Import libraries
+import os
 import pandas as pd
 import streamlit as st
 import requests
@@ -64,9 +65,12 @@ with st.sidebar.expander("I want to choose my values", expanded=False):
 
 send_req = st.button('Send get request')
 
+worker_port = int(os.environ.get("PORT", 8080))
+worker_address = "http://worker:" + str(worker_port) + "/predict/"
+
 # Main page button
 if send_req:
-    prediction = requests.get("http://backend:8080/predict/", 
+    prediction = requests.get(worker_address, 
                               params={"q": tuple(x17.values)})
     st.code(f'Parameters sent: {x17.values}')
     col1, col2 = st.columns(2)
@@ -80,9 +84,10 @@ if send_req:
         else:
             st.warning(f'y = {int(df.iloc[row_num]["target"])}')
 
-# Sidebar button            
+# Sidebar button        
+
 if send_req_sidebar:
-    prediction = requests.get("http://backend:8080/predict/", 
+    prediction = requests.get(worker_address, 
                               params={"q": features})
     st.code(f'Parameters sent: {features}')
     st.write('Model predicts')
@@ -157,11 +162,14 @@ with st.sidebar.expander("I want to choose my values", expanded=False):
 
 # END Sidebar ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-send_req = st.button('Send get request')
+ssend_req = st.button('Send get request')
+
+worker_port = int(os.environ.get("PORT", 8080))
+worker_address = "http://worker:" + worker_port + "/predict/"
 
 # Main page button
 if send_req:
-    prediction = requests.get("http://backend:8080/predict/", 
+    prediction = requests.get(worker_address, 
                               params={"q": tuple(x17.values)})
     st.code(f'Parameters sent: {x17.values}')
     col1, col2 = st.columns(2)
@@ -175,9 +183,10 @@ if send_req:
         else:
             st.warning(f'y = {int(df.iloc[row_num]["target"])}')
 
-# Sidebar button            
+# Sidebar button        
+
 if send_req_sidebar:
-    prediction = requests.get("http://backend:8080/predict/", 
+    prediction = requests.get(worker_address, 
                               params={"q": features})
     st.code(f'Parameters sent: {features}')
     st.write('Model predicts')
