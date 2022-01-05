@@ -1,6 +1,6 @@
 FROM python:3.9.7-slim
 
-ENV PORT=$PORT
+ENV WPORT=$PORT
 
 WORKDIR /app
 
