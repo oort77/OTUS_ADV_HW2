@@ -65,7 +65,7 @@ with st.sidebar.expander("I want to choose my values", expanded=False):
 
 send_req = st.button('Send get request')
 
-worker_port = int(os.environ.get("WPORT", 8080))
+worker_port = int(os.getenv('WPORT'))
 worker_address = "http://worker.1:" + str(worker_port) + "/predict/"
 
 # Main page button
