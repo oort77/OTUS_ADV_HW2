@@ -1,16 +1,16 @@
 version: '3'
 
 services:
-  frontend:
-    build: frontend
+  webapp:
+    build: webapp
     ports:
       - 8501:8501
     depends_on:
-      - backend
+      - worker
     volumes:
         - ./storage:/storage
-  backend:
-    build: backend
+  worker:
+    build: worker
     ports:
       - 8080:8080
     volumes:
